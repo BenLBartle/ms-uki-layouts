@@ -1,0 +1,47 @@
+{
+  "name": "ms-uki-layouts",
+  "version": "0.0.0",
+  "description": "Node CG Bundle for Layouts for Microsoft UKI Stream",
+  "homepage": "https://github.com/BenLBartle/ms-uki-layouts",
+  "author": {
+    "name": "Ben Bartle",
+    "email": "ben.bartle@gmail.com",
+    "url": "http://bartl.io"
+  },
+  "files": [
+    "dashboard",
+    "graphics",
+    "extension.js",
+    "extension"
+  ],
+  "keywords": [
+    "NodeCG",
+    "Layouts",
+    "Graphics",
+    "Streaming",
+    "OBS",
+    "Broadcast",
+    "nodecg-bundle"
+  ],
+  "nodecg": {
+    "compatibleRange": "^1.1.1",
+    "dashboardPanels": [
+      {
+        "name": "panel",
+        "title": "Panel",
+        "width": 2,
+        "file": "panel.html",
+        "headerColor": "#525F78"
+      }
+    ],
+    "graphics": [
+      {
+        "file": "index.html",
+        "width": 1280,
+        "height": 720
+      }
+    ]
+  },
+  "repository": "https://github.com/nodecg/nodecg.git",
+  "license": "Apache-2.0"
+}
