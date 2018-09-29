@@ -27,18 +27,18 @@
     "compatibleRange": "^1.1.1",
     "dashboardPanels": [
       {
-        "name": "panel",
-        "title": "Panel",
+        "name": "schedule",
+        "title": "Schedule",
         "width": 2,
-        "file": "panel.html",
+        "file": "schedule.html",
         "headerColor": "#525F78"
       }
     ],
     "graphics": [
       {
-        "file": "index.html",
+        "file": "ticker.html",
         "width": 1280,
-        "height": 720
+        "height": 57
       }
     ]
   },
