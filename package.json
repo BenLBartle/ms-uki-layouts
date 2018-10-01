@@ -32,11 +32,18 @@
         "width": 2,
         "file": "schedule.html",
         "headerColor": "#525F78"
+      },
+      {
+        "name": "nameplates",
+        "title": "Nameplates",
+        "width": 4,
+        "file": "nameplate.html",
+        "headerColor": "#f47425"
       }
     ],
     "graphics": [
       {
-        "file": "ticker.html",
+        "file": "index.html",
         "width": 1280,
         "height": 57
       }

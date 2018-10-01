@@ -1,6 +1,6 @@
-<link rel="import" href="../bower_components/polymer/polymer.html">
-
-
+<link rel="import" href="../../../bower_components/polymer/polymer.html">
+<dom-module id="ms-ticker">
+	<template>
 		<style>
 			:host {
 				display: flex;
@@ -74,7 +74,7 @@
 
 			#content {
 				transform-origin: left;
-				color:#12a824;
+				color: #12a824;
 				font-size: 32px;
 				font-weight: 400;
 				will-change: transform;
@@ -162,5 +162,35 @@
 				font-feature-settings: "tnum";
 			}
 		</style>
+		<img id="ms-logo" src="img/ms-uki-logo.png">
+		<div id="main">
+			<div id="label"></div>
+			<div id="body">
 				<div id="content"></div>
-	<script src="ticker.js"></script>
+			</div>
+			<div id="cta">
+				<div id="cta-1">
+					<span style="color: #f47425;">Tip of the Hats 2016</span>
+					supports
+					<span style="font-weight: 800;">One Step Camp</span>
+				</div>
+
+				<div id="cta-2">
+					Donate now at <span style="color: #f47425; font-weight: 800;">tipofthehats.org/donate</span>
+				</div>
+			</div>
+			<div id="challengeAccepted">
+				<div id="challengeAccepted-circle"></div>
+				<div id="challengeAccepted-text">
+					<div id="challengeAccepted-text-1">CHALLENGE ACCEPTED!</div>
+					<div id="challengeAccepted-text-2">&nbsp;</div>
+				</div>
+			</div>
+		</div>
+		<div id="total">
+			<div id="total-currency">$</div>
+			<div id="total-amount"></div>
+		</div>
+	</template>
+	<script src="ms-ticker.js"></script>
+</dom-module>
