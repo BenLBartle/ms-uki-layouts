@@ -1,0 +1,43 @@
+<link rel="import" href="../../../bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="../../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="../../../bower_components/nodecg-replicant/nodecg-replicant.html">
+<link rel="import" href="../../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../../../bower_components/paper-item/paper-item.html">
+<link rel="import" href="../../../bower_components/vaadin-combo-box/vaadin-combo-box.html">
+
+<dom-module id="ms-question-control">
+	<template>
+		<style include="iron-flex iron-flex-alignment">
+			.talent-dropdown {
+				padding: 0 4px;
+			}
+
+			.names {
+				padding: 0 4px;
+			}
+
+			.infos {
+				padding: 0 4px;
+			}
+		</style>
+
+		<div class="vertical layout">
+			<paper-input id="questionText" label="Question" always-float-label disabled={{questionVisible}} value={{question.text}}></paper-input>
+			<paper-input id="questionAsker" label="Asked By" always-float-label disabled={{questionVisible}} value={{question.asker}} ></paper-input>
+		</div>
+
+		<div class="horizontal layout">
+			<paper-button raised on-tap="showQuestion" disabled="{{questionVisible}}" class="nodecg-success flex">
+				Show Question
+			</paper-button>
+
+			<paper-button raised on-tap="hideQuestion" disabled="{{!questionVisible}}" class="nodecg-danger flex">
+				Hide Question
+			</paper-button>
+		</div>
+		<nodecg-replicant replicant-name="questionVisible" value="{{questionVisible}}"></nodecg-replicant>
+	</template>
+
+	<script src="ms-question-control.js"></script>
+</dom-module>

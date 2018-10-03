@@ -22,7 +22,7 @@
 			}
 		</style>
 
-		<iron-ajax auto url="nameplate.json" handle-as="json" last-response="{{talentRoster}}"></iron-ajax>
+		<iron-ajax auto url="names.json" handle-as="json" last-response="{{talentRoster}}"></iron-ajax>
 
 		<div class="horizontal layout">
 			<div class="flex talent-dropdown">
@@ -87,73 +87,7 @@
 				Hide Couch
 			</paper-button>
 		</div>
-
-		<div class="horizontal layout">
-			<div class="flex players-dropdown">
-				<vaadin-combo-box
-						disabled="[[playersVisible]]"
-						label="Top Left"
-						items="[[talentRoster]]"
-						on-selected-item-changed="_handleSelectedItemChanged"
-						item-label-path="name"
-				        data-slot="player3"
-				></vaadin-combo-box>
-
-				<vaadin-combo-box
-						disabled="[[playersVisible]]"
-						label="Bottom Left"
-						items="[[talentRoster]]"
-						on-selected-item-changed="_handleSelectedItemChanged"
-	                    item-label-path="name"
-				        data-slot="player1"
-				></vaadin-combo-box>
-
-				<vaadin-combo-box
-						disabled="[[playersVisible]]"
-						label="Top Right"
-						items="[[talentRoster]]"
-						on-selected-item-changed="_handleSelectedItemChanged"
-	                    item-label-path="name"
-				        data-slot="player4"
-				></vaadin-combo-box>
-
-				<vaadin-combo-box
-						disabled="[[playersVisible]]"
-						label="Bottom Right"
-						items="[[talentRoster]]"
-						on-selected-item-changed="_handleSelectedItemChanged"
-                        item-label-path="name"
-				        data-slot="player2"
-				></vaadin-combo-box>
-			</div>
-
-			<div class="flex-2 names">
-				<paper-input disabled="[[playersVisible]]" label="Name" value="{{player3.name}}" always-float-label></paper-input>
-				<paper-input disabled="[[playersVisible]]" label="Name" value="{{player1.name}}" always-float-label></paper-input>
-				<paper-input disabled="[[playersVisible]]" label="Name" value="{{player4.name}}" always-float-label></paper-input>
-				<paper-input disabled="[[playersVisible]]" label="Name" value="{{player2.name}}" always-float-label></paper-input>
-			</div>
-
-			<div class="flex-2 infos">
-				<paper-input disabled="[[playersVisible]]" label="Info" value="{{player3.info}}" always-float-label></paper-input>
-				<paper-input disabled="[[playersVisible]]" label="Info" value="{{player1.info}}" always-float-label></paper-input>
-				<paper-input disabled="[[playersVisible]]" label="Info" value="{{player4.info}}" always-float-label></paper-input>
-				<paper-input disabled="[[playersVisible]]" label="Info" value="{{player2.info}}" always-float-label></paper-input>
-			</div>
-		</div>
-
-		<div class="horizontal layout">
-			<paper-button raised on-tap="showPlayers" disabled="{{playersVisible}}" class="nodecg-success flex">
-				Show Players
-			</paper-button>
-
-			<paper-button raised on-tap="hidePlayers" disabled="{{!playersVisible}}" class="nodecg-danger flex">
-				Hide Players
-			</paper-button>
-		</div>
-
 		<nodecg-replicant replicant-name="couchVisible" value="{{couchVisible}}"></nodecg-replicant>
-		<nodecg-replicant replicant-name="playerVisible" value="{{playersVisible}}"></nodecg-replicant>
 	</template>
 
 	<script src="ms-nameplate-control.js"></script>

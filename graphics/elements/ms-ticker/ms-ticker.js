@@ -2,24 +2,15 @@
 	'use strict';
 
 	const INTERVAL = 10;
-	const challenges = nodecg.Replicant('challenges');
-	const wars = nodecg.Replicant('wars');
 	const onNow = nodecg.Replicant('onNow');
 	const upNext = nodecg.Replicant('upNext');
-	const total = nodecg.Replicant('total');
 
 	Polymer({
 		is: 'ms-ticker',
 
 		ready() {
 			this.tl = new TimelineLite({autoRemoveChildren: true});
-			this.$['total-amount'].rawValue = 0;
 			this.tl.set(this.$.content, {y: '100%'});
-			this.challengeAccepted = this.challengeAccepted.bind(this);
-			nodecg.listenFor('challengeAccepted', this.challengeAccepted);
-		},
-
-		attached() {
 			setTimeout(() => {
 				// Start the rotation
 				this.showSchedule();
@@ -27,29 +18,7 @@
 				// Do this on a delay, otherwise it sometimes freaks out and makes #content have zero width.
 			}, 1500);
 		},
-
-		totalChanged(newVal) {
-			const TIME_PER_DOLLAR = 0.03;
-			const totalAmountEl = this.$['total-amount'];
-			const delta = newVal.raw - totalAmountEl.rawValue;
-			const duration = Math.min(delta * TIME_PER_DOLLAR, 5);
-			let strLen = totalAmountEl.textContent.length;
-			TweenLite.to(totalAmountEl, duration, {
-				rawValue: newVal.raw,
-				ease: Power2.easeOut,
-				onUpdate: function () {
-					totalAmountEl.textContent = totalAmountEl.rawValue.toLocaleString('en-US', {
-						maximumFractionDigits: 0
-					});
-
-					if (totalAmountEl.textContent.length !== strLen) {
-						this.fitContent();
-						strLen = totalAmountEl.textContent.length;
-					}
-				}.bind(this)
-			});
-		},
-
+		
 		fitContent() {
 			const maxWidth = this.$.body.clientWidth - 32;
 			const contentWidth = this.$.content.clientWidth;
@@ -129,112 +98,6 @@
 
 			//this.tl.call(this.showChallenges, null, this);
 		},
-
-		showChallenges() {
-			if (challenges.value.length <= 0) {
-				this.tl.call(this.showWars, null, this, '+=0.33');
-				return;
-			}
-
-			this.tl.call(() => {
-				// Measure the width of the longest challenge text
-				let maxWidth = 0;
-				this.$.content.style.width = 'auto';
-				challenges.value.forEach(challenge => {
-					this._setChallengeContent(challenge);
-					const width = this.$.content.clientWidth;
-					if (width > maxWidth) {
-						maxWidth = width;
-					}
-				});
-
-				this.$.content.style.width = `${maxWidth}px`;
-				this.customStyle['--toth-ticker-content-color'] = '#12a824';
-				this.updateStyles();
-				this.$.label.innerText = 'CHALLENGE';
-				this._setChallengeContent(challenges.value[0]);
-			});
-			this.enter();
-			this.tl.to({}, INTERVAL, {});
-
-			challenges.value.slice(1).forEach(challenge => {
-				this.tl.to(this.$.content, 0.4, {
-					y: '100%',
-					ease: Power3.easeIn
-				});
-
-				this.tl.call(this._setChallengeContent, [challenge], this);
-
-				this.tl.to(this.$.content, 0.66, {
-					y: '0%',
-					ease: Power3.easeOut
-				});
-
-				this.tl.to({}, INTERVAL, {});
-			});
-
-			this.exit();
-
-			this.tl.call(this.showWars, null, this);
-		},
-
-		showWars() {
-			if (wars.value.length <= 0) {
-				this.tl.call(this.showCTA, null, this, '+=0.33');
-				return;
-			}
-
-			this.tl.call(() => {
-				// Measure the width of the longest war text
-				let maxWidth = 0;
-				this.$.content.style.width = 'auto';
-				wars.value.forEach(war => {
-					this._setWarContent(war);
-					war.options.forEach((option, index) => {
-						this._setWarOption(option, index);
-						const width = this.$.content.clientWidth;
-						if (width > maxWidth) {
-							maxWidth = width;
-						}
-					});
-				});
-
-				this.$.content.style.width = `${maxWidth}px`;
-				this.customStyle['--toth-ticker-content-color'] = '#7c149e';
-				this.updateStyles();
-				this.$.label.innerText = 'DONATION WAR';
-				this._setWarContent(wars.value[0]);
-				this._setWarOption(wars.value[0].options[0], 0);
-			});
-			this.enter();
-			this.tl.to({}, INTERVAL, {});
-
-			wars.value.forEach((war, index) => {
-				if (index > 0) {
-					this.tl.to(this.$.content, 0.4, {
-						y: '100%',
-						ease: Power3.easeIn
-					});
-
-					this.tl.call(this._setWarContent, [war], this);
-					this.tl.call(this._setWarOption, [war.options[0], 0], this);
-
-					this.tl.to(this.$.content, 0.66, {
-						y: '0%',
-						ease: Power3.easeOut
-					});
-				}
-
-				war.options.slice(1).forEach(this._optionAnim.bind(this));
-
-				this.tl.to({}, INTERVAL, {});
-			});
-
-			this.exit();
-
-			this.tl.call(this.showCTA, null, this);
-		},
-
 		showCTA() {
 			this.tl.to(this.$.cta, 0.66, {
 				y: '0%',
@@ -254,58 +117,6 @@
 			this.tl.set(this.$.cta, {y: '100%'});
 
 			this.tl.call(this.showSchedule, null, this);
-		},
-
-		challengeAccepted({name, total}) {
-			const tl = new TimelineLite();
-
-			tl.set(this.$['challengeAccepted-circle'], {y: '-50%'});
-
-			tl.add('start');
-
-			tl.to([this.$.label, this.$.body, this.$.cta], 0.33, {
-				opacity: 0,
-				ease: Power1.easeIn
-			}, 'start');
-
-			tl.to(this.$['challengeAccepted-circle'], 1, {
-				onStart: function () {
-					nodecg.playSound('challenge_accepted');
-					this.$['challengeAccepted-text-2'].innerHTML = `${name} - <b>${total}</b>`;
-				}.bind(this),
-				ease: Power4.easeInOut,
-				scale: 1
-			}, 'start');
-
-			tl.add('text', '-=0.5');
-
-			tl.to(this.$['challengeAccepted-text'], 0.4, {
-				y: '0%',
-				ease: Power3.easeOut
-			}, 'text');
-
-			tl.to(this.$['challengeAccepted-text'], 0.88, {
-				y: '-50%',
-				ease: Power3.easeInOut
-			}, 'text+=2.7');
-
-			tl.to(this.$['challengeAccepted-text'], 0.4, {
-				y: '-100%',
-				ease: Power3.easeIn
-			}, `+=3.75`);
-
-			tl.to(this.$['challengeAccepted-circle'], 1, {
-				ease: Power4.easeInOut,
-				scale: 0
-			}, '-=0.1833');
-
-			tl.to([this.$.label, this.$.body, this.$.cta], 0.33, {
-				opacity: 1,
-				ease: Power1.easeIn
-			});
-
-			// Reset
-			tl.set(this.$['challengeAccepted-text'], {y: '50%'});
 		},
 
 		_optionAnim(option, index) {

@@ -1,0 +1,165 @@
+<link rel="import" href="../../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="../../../bower_components/iron-image/iron-image.html">
+
+<dom-module id="ms-nameplate">
+	<template>
+		<style>
+			:host {
+				position: absolute;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				width: 1920px;
+				height: 1080px;
+				line-height: 1;
+				white-space: nowrap;
+			}
+
+			/*
+			 * Styles shared between couch and player nameplates.
+			 */
+
+			.name {
+				height: 79px;
+				background-color: #d3c9c9;
+				border-bottom: 8px solid rgb(240,78,55);
+				box-sizing: border-box;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				padding: 0 20px;
+			}
+
+			.name-content {
+				/* cheat down vertically a bit to improve apparent centering */
+				position: relative;
+				color: black;
+				font-family: 'IBM Plex Sans';
+				font-weight: 600;
+				font-size: 50px;
+				transform-origin: left;
+			}
+
+			.info {
+				display: flex;
+				align-items: center;
+				height: 57px;
+				background-color: rgb(64,64,64);
+				box-sizing: border-box;
+				padding: 0 20px;
+			}
+
+			.info-content {
+				color: white;
+				font-family: 'IBM Plex Sans';
+				font-size: 28px;
+				font-weight: 400;
+				transform-origin: left;
+			}
+
+			/*
+			 * Couch & Host nameplate styles.
+			 */
+
+			#couch {
+				position: absolute;
+				top: 800px;
+				left: 0;
+				display: flex;
+				flex-direction: column;
+				align-items: baseline;
+
+				/* Prep for animation */
+				transform: translateY(300px);
+			}
+
+			#couch-names {
+				/*width: 1342px;*/
+				justify-content: flex-start;
+				padding: 0;
+				padding-right: 80px;
+			}
+
+			#couch-infos {
+				/*width: 1266px;  /* 422 * 3, the width of each couch column */
+				justify-content: flex-start;
+				padding: 0;
+			}
+
+			.couch-name {
+				color: black;
+				font-size: 50px;
+				font-family: 'IBM Plex Sans';
+				font-weight: 600;
+				margin-left: 80px;
+				box-sizing: border-box;
+				transform-origin: left;
+			}
+
+			.couch-info {
+				color: white;
+				font-family: 'IBM Plex Sans';
+				font-size: 28px;
+				font-weight: 400;
+				margin-left: 80px;
+				box-sizing: border-box;
+				transform-origin: left;
+			}
+
+			.couch-column {
+				width: 342px;
+			}
+
+			#host {
+				display: flex;
+				align-items: flex-end;
+				flex-direction: column;
+				position: absolute;
+				top: 800px;
+				right: 0;
+
+				/* Prep for animation */
+				transform: translateY(300px);
+				opacity: 0;
+			}
+
+			#host .name {
+				width: 465px;
+				justify-content: flex-start;
+			}
+
+			#host .info {
+				width: 415px;
+			}
+
+			
+		</style>
+
+		<div id="couch">
+			<div id="couch-names" class="name">
+				<div id="couch1-name" class="couch-name couch-column" hidden="[[!couch1]]"></div>
+				<div id="couch2-name" class="couch-name couch-column" hidden="[[!couch2]]"></div>
+				<div id="couch3-name" class="couch-name couch-column" hidden="[[!couch3]]"></div>
+			</div>
+
+			<div id="couch-infos" class="info">
+				<div id="couch1-info" class="couch-info couch-column" hidden="[[!couch1]]"></div>
+				<div id="couch2-info" class="couch-info couch-column" hidden="[[!couch2]]"></div>
+				<div id="couch3-info" class="couch-info couch-column" hidden="[[!couch3]]"></div>
+			</div>
+		</div>
+
+		<div id="host">
+			<div class="name">
+				<div class="name-content"></div>
+			</div>
+
+			<div class="info">
+				<div class="info-content"></div>
+			</div>
+		</div>
+	</template>
+
+	<script src="ms-nameplate.js"></script>
+</dom-module>

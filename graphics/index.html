@@ -1,26 +1,25 @@
 <!DOCTYPE html>
 <html>
+
 <head lang="en">
-    <meta charset="UTF-8">
-    <script src="//use.typekit.net/ofl6oue.js"></script>
-    <script>try {Typekit.load();} catch (e) {}</script>
+	<meta charset="UTF-8">
+	<script src="http://use.typekit.net/ofl6oue.js"></script>
+	<script>try { Typekit.load(); } catch (e) { }</script>
 	<script src="../bower_components/gsap/src/minified/TweenMax.min.js"></script>
-	<link href="../bower_components/polymer/polymer.html" rel="import">
-	<link href="elements/ms-ticker/ms-ticker.html" rel="import">
+	<link href="elements/ms-nameplate/ms-nameplate.html" rel="import">
+	<link href="elements/ms-question/ms-question.html" rel="import">
 	<style>
 		body {
 			margin: 0;
-			opacity: 0;
+			opacity: 1;
 		}
 
 		#container {
 			position: absolute;
-			width: 1920px;
+			width: 1900px;
 			height: 1080px;
 			overflow: hidden;
-			font-family: "proxima-nova";
-			/*background: url("http://i.imgur.com/EcIltyp.png");
-			background: url("http://i.imgur.com/ivbkXt1.png");*/
+			font-family: "IBM Plex Sans";
 		}
 
 		#brb {
@@ -63,15 +62,19 @@
 			top: 680px;
 			left: 25px;
 		}
-    #nameplate {
-      position: absolute;
-      top: 180px;
-    }
+
+		#nameplate {
+			position: absolute;
+			top: 180px;
+		}
 	</style>
 </head>
+
 <body>
-    <div id="container">
-	<ms-ticker id="ms-ticker"></ms-ticker>
-    </div>
+	<div id="container">
+		<ms-nameplate></ms-nameplate>
+		<ms-question></ms-question>
+	</div>
 </body>
+
 </html>

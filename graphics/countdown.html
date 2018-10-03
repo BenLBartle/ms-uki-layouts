@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <script src="http://use.typekit.net/ofl6oue.js"></script>
+    <script>try { Typekit.load(); } catch (e) { }</script>
+    <style>
+        body {
+            margin: 0;
+        }
+
+        #container {
+            position: absolute;
+            width: 1920px;
+            height: 1080px;
+            overflow: hidden;
+            font-family: "proxima-nova";
+            background: lightslategray;
+            color: white;
+        }
+
+        #loop {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 1920px;
+            height: 1080px;
+        }
+
+        #hashtag {
+            position: absolute;
+            top: 18px;
+            left: 24px;
+            font-size: 32px;
+            font-weight: 700;
+            color: white;
+            opacity: 0.5;
+        }
+
+        #content {
+            position: absolute;
+            margin-left: auto;
+            margin-right: auto;
+            left: 0;
+            right: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            top: 0;
+            height: 100%;
+            -webkit-filter: drop-shadow(0 0 8px rgba(0, 0, 0, 0.5));
+        }
+
+        #logo {
+            height: 280px;
+        }
+
+        #flavor {
+            font-size: 42px;
+            margin-top: 12px;
+        }
+
+        #time {
+            font-size: 192px;
+            -webkit-font-feature-settings: 'tnum';
+            font-weight: 600;
+            transition: opacity 333ms ease;
+            opacity: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container">
+        <div id="hashtag">#ibmmsft</div>
+        <div id="content">
+            <img id="logo" src="img/logo.png">
+            <div id="flavor">will begin shortly!</div>
+            <div id="time"></div>
+        </div>
+    </div>
+
+    <script src="countdown.js"></script>
+</body>
+
+</html>
